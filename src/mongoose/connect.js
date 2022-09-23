@@ -1,11 +1,14 @@
 const mongoose = require("mongoose");
-const url ='mongodb+srv://mohit:mchopra123@cluster0.36k0lak.mongodb.net/?retryWrites=true&w=majority';
+
 const db =async ()=>{
-    const conn = mongoose.connect(url, {
+     mongoose.connect('mongodb+srv://mohit:mchopra123@cluster0.36k0lak.mongodb.net/?retryWrites=true&w=majority', {
         useCreateIndex: "true",
         useNewUrlParser: "true",
         useUnifiedTopology: "true",
         useFindAndModify: "false"
+    }).then(()=>{
+            console.log("connection established");
+    }).catch(()=>{
+        console.log("connection not estblished");
     })
-}
-
+};
