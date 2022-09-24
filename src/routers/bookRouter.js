@@ -9,20 +9,18 @@ router.post('/create',async (req,resp)=>{
     let result = await data.save();
     resp.send(result)
     }
-);
-
-router.delete('/delete/:_id', async (req,resp)=>{
-    let data = await bookList.deleteOne(req.params);
-    resp.send(data);
-});
-        
-        
+);        
 router.put('/update/:_id', async (req,resp)=>{
     let data = await bookList.updateOne(
         req.params,{
             $set: req.body
         }
     );
+    resp.send(data);
+});
+
+router.delete('/delete/:_id', async (req,resp)=>{
+    let data = await bookList.deleteOne(req.params);
     resp.send(data);
 });
 module.exports = router;
