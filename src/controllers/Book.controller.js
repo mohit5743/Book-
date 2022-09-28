@@ -63,9 +63,9 @@ updateABook: async (req, res, next) => {
     }
 },
 deleteABook: async (req, res, next) => {
-    const id = req.params.id;
+    const _id = req.params.id;
     try {
-      const result = await Book.findByIdAndDelete(id);
+      const result = await Book.findByIdAndDelete(_id);
       // console.log(result);
       if (!result) {
         throw error(404, 'Book does not exist.');
