@@ -1,26 +1,21 @@
-const express = require('express');
-const router = new express.Router();
-router.get('/list', async (req,resp)=>{
-    let data = await bookList.find();
-    resp.send(data);
-});
-router.post('/create',async (req,resp)=>{
-    let data = new bookList(req.params);
-    let result = await data.save();
-    resp.send(result)
-    }
-);        
-router.put('/update/:_id', async (req,resp)=>{
-    let data = await bookList.updateOne(
-        req.params,{
-            $set: req.body
-        }
-    );
-    resp.send(data);
-});
+const express =require('express');
 
-router.delete('/delete/:_id', async (req,resp)=>{
-    let data = await bookList.deleteOne(req.params);
-    resp.send(data);
-});
-module.exports = router;
+const router =new express.Router();
+
+const bookController= require('../controllers/Book.controller');
+
+//Get a list of all books
+router.get('/', bookController.getAllProducts);
+
+//Create a new book
+router.post('/', bookController.createNewProduct);
+
+//Get a book by id
+router.get('/:id', bookController.findProductById);
+
+//Update a book by id
+router.patch('/:id', bookController.updateAProduct);
+
+//Delete a book by id
+router.delete('/:id', bookController.deleteAProduct);
+module.exports= router;
