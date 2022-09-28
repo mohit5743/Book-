@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const db =async ()=>{
-        await mongoose.connect('mongodb+srv://mohit:Mchopra123@cluster0.36k0lak.mongodb.net/?retryWrites=true&w=majority', {
+const db = ()=>{
+        mongoose.connect('mongodb+srv://mohit:Mchopra123@cluster0.36k0lak.mongodb.net/?retryWrites=true&w=majority', {
         useCreateIndex: "true",
         useNewUrlParser: "true",
         useUnifiedTopology: "true",
@@ -30,3 +30,4 @@ const db =async ()=>{
         });
       });
 };
+module.exports=db;
