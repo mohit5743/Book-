@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const Book= require('../models/author.js');
 
 module.exports = {
@@ -19,7 +18,7 @@ createNewBook: async (req, res, next) => {
     } catch (error) {
       console.log(error.message);
       if (error.name === 'ValidationError') {
-        next(createError(422, error.message));
+        next(error(422, error.message));
         return;
       }
       next(error);
@@ -31,13 +30,13 @@ findBookById: async (req, res, next) => {
       const Book = await Book.findById(id);
       // const Book = await Book.findOne({ _id: id });
       if (!Book) {
-        throw createError(404, 'Book does not exist.');
+        throw error(404, 'Book does not exist.');
       }
       res.send(Book);
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid Book id'));
+        next(error(400, 'Invalid Book id'));
         return;
       }
       next(error);
@@ -51,13 +50,13 @@ updateABook: async (req, res, next) => {
 
       const result = await Book.findByIdAndUpdate(id, updates, options);
       if (!result) {
-        throw createError(404, 'Book does not exist');
+        throw error(404, 'Book does not exist');
       }
       res.send(result);
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        return next(createError(400, 'Invalid Product Id'));
+        return next(error(400, 'Invalid Product Id'));
       }
 
       next(error);
@@ -69,13 +68,13 @@ deleteABook: async (req, res, next) => {
       const result = await Book.findByIdAndDelete(id);
       // console.log(result);
       if (!result) {
-        throw createError(404, 'Book does not exist.');
+        throw error(404, 'Book does not exist.');
       }
       res.send(result);
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid Book id'));
+        next(error(400, 'Invalid Book id'));
         return;
       }
       next(error);
