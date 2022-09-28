@@ -8,9 +8,7 @@ const db =async ()=>{
         useFindAndModify: "false"
     }).then(()=>{
             console.log("connection established");
-    }).catch(()=>{
-        console.log("connection not estblished");
-    })
+    }).catch(err=>console.log(err.message));
     mongoose.connection.on('connected', () => {
         console.log('Mongoose connected to db...');
       });
